@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/机器人聊天.css">
+    <script src="js/jq.min.js"></script>
+    <script src="js/鼠标滚轮侦测.js"></script>
+    <title>聊天机器人</title>
+</head>
+<body>
+    <div class="wrap">
+        <!-- 头部区域 -->
+        <div class="header">
+            <h3>小明同学</h3>
+            <img src="img/.webp" alt="icon">
+        </div>
+        <!-- 聊天内容区域 -->
+        <div class="main">
+            <ul class="talk-list" style="top:0px">
+                <li class="left-word"><img src="img/.webp"><span>你好</span></li>
+                <li class="right-word"><img src="img/.webp"><span>你好</span</li>
+                
+            </ul>
+            <div class="drag-bar" style="display:none ;">
+                <div class="drager-bar"></div>
+            </div>
+        </div>
+        <!-- 消息编辑区域 -->
+        <div class="footer">
+            <img src="img/.webp" alt="icon">
+            <input type="text" placeholder="说点什么吧" class="input-txt" id="ipt"/>
+            <input type="button" value="发送" class="input-sub" id="btnsend"/>
+        </div>
+    </div>
+    <audio src="" id="voice" autoplay style="display:none"></audio>
+    <script type="text/javascript" src="js/鼠标滚轮侦测.js"></script>
+    <script src="js/聊天机器人.js"></script>
+    <script>
+       $(
+    function(){
+    // 为发送按钮绑定鼠标点击事件
+    $("#btnsend").on("click",function(){
+        // 找到文本框的值,去掉空白符号
+        var text = $("#ipt").val().trim();
+        // 如果用户输入空内容，就清空内容
+        if(text.length<=0){return $("#ipt").val("")}
+        // 如果用户输入了内容，就把内容追加到页面上显示
+        $(".talk-list").append('<li class="right-word"><img src="img/.webp"><span>'+text+'</span</li>');
+            // 追加后清空文本框
+            $("#ipt").val("");
+            // 发起请求获取聊天内容
+            getMSG(text);
+    })
+
+    // 获取聊天机器人发送回来的消息
+    function getMSG(text){
+        $.ajax({
+            method:'GET',
+            url:'http://ajax.frontend.itheima.net:3006/api/robot',
+            data:{spoken:text},
+            success:function(res){
+                // 如果成功
+                if(res.message === 'success')
+                // 接受聊天消息
+                var msg = res.data.info.text;
+                $(".talk-list").append('<li class="left-word"><img src="img/.webp"><span>'+msg+'</span></li');
+            }
+        })
+        
+    }
+    // 发起get请求
+    function getVoice(text){
+        $.ajax({
+            method:"GET",
+            url:'http://ajax.frontend.itheima.net:3006/api/synthesize',
+            data:{text:text},
+            success:function(res){
+                if(res.status === 200){
+                    // 找到音乐，添加src属性，播放语音
+                    $("#voice").attr('src',res.voiceUrl);
+                }
+            }
+        })
+    }
+    // 按回车键发送信息
+    // 给文本框绑定一个keyup事件
+    $("#ipt").on("keyup",function(e){
+        // 如果按下的代码是13
+        if(e.keyCode===13){
+            // 找到发送按钮，进行点击事件
+            $("#btnsend").click();
+        }
+    })
+    // 
+})
+    </script>
+</body>
+</html>

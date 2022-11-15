@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="jq.min.js"></script>
+</head>
+<body>
+    <div>你好</div>
+    <div>你好</div>
+    <div>你好</div>
+    <script>
+        // 如果针对同一元素做不同的操作，可以用遍历元素
+        var sum = 0;
+        // each()方法遍历元素
+        // 先创建一个数组，数组里装不同操作
+        var arr = ["red","green","pink"];
+        // 
+        $("div").each(function(i,yuansu){
+            //回调函数第一个参数一定是索引号，可以自己设置索引号名字
+            // 第二个参数一定是元素对象
+            // each获取的是dom对象,把他转换为元素对象,然后设置样式
+            $(yuansu).css("color",arr[i]);
+        })
+        // 遍历数组$.each(数组名字，function(序列号，元素名字))；
+        $.each(arr,function(i,yuan){
+            console.log(i);
+            console.log(yuan);
+        })
+    </script>
+</body>
+</html>

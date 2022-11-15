@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <button></button>
+    <div></div>
+    <script>
+        var div = document.querySelector('div');
+        var time =5;
+        kaishi();//先调用一次函数，防止页面刚开始出现空白
+        setInterval(kaishi,1000);
+        function kaishi(){
+            if(time==0){
+                location.href = 'http://baidu.com';//获取页面的地址，并赋值
+            }else{
+                div.innerHTML='页面将在'+time+'秒内自动跳转'
+            time--;
+            }
+        }
+    </script>
+</body>
+</html>

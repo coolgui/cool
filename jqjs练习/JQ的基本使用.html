@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="jq.min.js"></script>
+    <style>
+        div{
+            width: 200px;
+            height: 200px;
+            background: red;
+        }
+    </style>
+</head>
+<body>
+    <script>
+        //等着页面加载完毕后再去执行js
+        // $小括号里面加方法
+        $(function(){
+            $('div').hide();
+        })
+        // DOM对象转换为JQ对象/js转换为jq
+        var div = document.querySelector('div');//原生获取名字
+        $(div)//直接$(里面甩获取的对象)
+
+        //JQ对象转换为DOM对象/jq转换为js
+        // 在获取的jq对象后加个数组序列号0
+        $('div')[0]
+
+    </script>
+    <div></div>
+   
+</body>
+</html>

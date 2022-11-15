@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="js/jq.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <style>
+        span{
+            color: black;
+        }
+    </style>
+</head>
+<body>
+    
+      
+    <input type="text" id="title">
+    <section>
+        <h2>正在进行<span id="todocout"></span></h2>
+        <ol id="todolist" class="demo-box">
+        </ol>
+        <h2>已经完成<span id="donecount"></span></h2>
+        <ul id="donelist">
+        </ul>
+    </section>
+    <script>
+        load();
+        var todolist = [{
+            title:'我今天吃八个馒头',
+            done:false
+        },{
+            title:'我今天吃九个馒头',
+            done:false
+        },];
+        // 本地存储里面只能存储字符串的数据格式，把我们的数组对象转换为字符串格式JSON.stringify()
+        localStorage.setItem("todo",JSON.stringify(todolist));
+        var data = localStorage.getItem("todo");
+        // 获取本地存储的数据，我们想要把字符串转换为对象格式，数组JSON.parse
+        data = JSON.parse(data);
+        // 按下回车把完整数据存储到本地存储里
+        // 存储数据的格式 
+        $("#title").on("keydown",function(event){
+            
+            // 如果按下的是回车键，回车键的码是13
+            if(event.keyCode===13){
+                // 如果当前的值为空
+                if($(this).val() === ""){
+                    // 则弹出弹出
+                    alert("请输入您要做的事情");
+                }else{
+                    // 先读取本地存储原来的数据
+                var local = getData();
+                // 把local数组进行更新数据，把最新的数据追加给local数组
+                local.push({title:$(this).val(),done:false});
+                // 把这个数组local存储给本地存储,调用函数
+                savaDate(local);
+                // todolist本地存储数据渲染加载到页面
+                load();
+                $(this).val("");//按下回车键后清空数值
+            }
+                }
+        });
+        // todolist删除操作
+        $("ul,ol").on("click","a",function(){
+            // 先获取本地存储
+            var data = getData();
+            // 修改数据
+            // 获取当前a的id序列号
+            var index = $(this).attr("id");
+
+            data.splice(index,1);
+            // 保存到本地存储
+            savaDate(data);
+            // 重新渲染页面
+            load();
+
+        })
+        // todolist正在进行和已完成选项操作
+        $("ul, ol").on("click","input",function(){
+            // 先获取本地存储的数据
+            var data = getData();
+            // 修改数据
+            // 获取复选框的序列号，跟a是一起的所以一样
+            var index =$(this).siblings("a").attr("id");
+            // 修改数组里边对应的index属性，修改为当前复选框的选定状态
+            data[index].done = $(this).prop("checked");
+            // 保存到本地存储
+            savaDate(data);
+            // 重新渲染页面
+            load();
+        })
+        // 读取本地存储的数据
+        function getData(){
+            var data = localStorage.getItem("todolist");
+            if(data!==null){
+                // 本地存储里面的数据是字符串格式，但是我们需要的是对象格式,转换格式
+                // 如果有数据，就返回数据，因为是数据类型所以要转换为对象格式
+                return JSON.parse(data);
+            }else{
+                // 如果没有数据，就返回一个空的数组
+                return [];
+            }
+        }
+        // 保存本地存储数据
+        function savaDate(data){
+            localStorage.setItem("todolist",JSON.stringify(data));
+        }
+        // 渲染加载数据
+        function load(){
+            // 读取本地存储的数据
+            var data = getData();
+            // 遍历之前要先清空ol里面的内容
+            $("ol,ul").empty();
+            var todoCount = 0;//正在进行的个数
+            var doneCount =0;//已经完成的个数
+            // 遍历本地存储的数据
+            $.each(data, function(i,n){
+                // 如果返回的数据的done值是true给ul添加li，如果不是给ol添加li
+                if(n.done){
+                // 设置li的html元素样式
+                $("ul").prepend("<li><input type='checkbox' checked='checked'> <p>"+n.title+"</p><a href='javascript:;' id="+i+">删除</a></li>");
+                doneCount++;
+            }else{
+                $("ol").prepend("<li><input type='checkbox'> <p>"+n.title+"</p><a href='javascript:;' id="+i+">删除</a></li>");
+                todoCount++;
+            }
+            })
+            $("#todocout").text(todoCount);
+            $("#donecount").text(doneCount);
+
+        }
+    </script>
+    
+</body>
+</html>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .box{
+            width: 200px;
+            height: 200px;
+            background: red;
+            margin: 100px;
+            color: black;
+        }
+    </style>
+</head>
+<body>
+    <div class="box"></div>
+    <script>
+        //我们在盒子内移动，想要得到鼠标距离盒子左右的距离
+        // 首先得到鼠标在页面的坐标(e.pageX,e.pageY)
+        // 其次得到盒子在页面中的距离(box.offsetLeft,box.offsetTop)
+        // 用鼠标距离页面的坐标减去盒子在页面中的距离，得到鼠标在盒子内的坐标
+        var box = document.querySelector('.box');
+        box.addEventListener('mousemove',function(e){
+            var x = e.pageX-box.offsetLeft;
+            var y = e.pageY-box.offsetTop;
+            box.innerHTML = '鼠标在盒子里的x坐标是'+x+'<br/>'+'y坐标是'+y;
+        })
+    </script>
+</body>
+</html>

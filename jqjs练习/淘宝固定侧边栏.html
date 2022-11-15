@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .header{
+            height: 150px;
+            width: 1000px;
+            background: pink;
+        }
+        .slider{
+            position: absolute;
+            left: 1010px;
+            top: 500px;
+            background: rgb(38, 255, 0);
+            width: 30px;
+            height: 90px;
+        }
+        .banner{
+            height: 700px;
+            width: 1000px;
+            background: rgb(251, 0, 42);
+        }
+        .main{
+            height: 2000px;
+            width: 1000px;
+            background: rgb(0, 132, 255);
+        }
+    </style>
+</head>
+<body>
+    <!-- 淘宝固定侧边栏 -->
+    <div class="slider">
+        <span class="goBack"></span>
+    </div>
+    <div class="header">头部区域</div>
+    <div class="banner">banner区域</div>
+    <div class="main">主体部分</div>
+    <script>
+        var banner = document.querySelector('.banner');
+        var bannerTop = banner.offsetTop;//被卷去头部的大小
+        var slider = document.querySelector('.slider');
+        var sliderTop = slider.offsetTop - bannerTop;//获取的是slider距离页面的高度
+        var main = document.querySelector('.main');
+        
+        // 页面滚动事件scroll
+        document.addEventListener('scroll',function(){
+            // window.pageYOffset页面被卷去的头部距离
+            // 当我们页面被卷去的头部大于等于被卷去的头部,侧边栏就改为固定定位
+            if(window.pageYOffset>=bannerTop){
+                slider.style.position = 'fixed';
+                slider.style.top = sliderTop+'px';
+            }else{
+                slider.style.position = 'absolute';
+                slider.style.top = '500px';//距离小于100复原原来的距离
+            }
+            if(window.pageYOffset>=main.offsetTop){
+                slider.innerHTML = "返回";
+            }else{
+                slider.innerHTML = "";
+            }
+
+        })
+        slider.addEventListener('click',function(){
+            // 当我们点击了返回模块，就让窗口滚到页面的最上方
+           window.scroll(0,0);
+        })
+    </script>
+</body>
+</html>

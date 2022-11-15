@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="js/jq.min.js"></script>
+    <script src="js/template.js"></script>
+</head>
+<body>
+    <div id="news-list">
+        
+    </div>
+
+<!-- 定义模板 -->
+<script type="text/html" id="tpl-news">
+    <!-- 循环数据 -->
+   
+    {{each data}}
+    <div class="news-item">
+        <img class="thumb" src="{{'http://www.liulongbin.top:3006'+$value.img}}" alt=""/>
+        <div class="right-box">
+            <h1 class="title">{{$value.title}}</h1>
+            <div class="tags">
+                {{each $value.tags}}
+                <span>{{$value}}</span>
+                {{/each}}
+            </div>
+            <div class="footer">
+                <div>
+                    <span>{{$value.source}}</span>&nbsp;&nbsp;
+                    <span>{{$value.time | guo}}</span>
+                </div>
+                <span>评论数:{{$value.cmtcount}}</span>
+            </div>
+        </div>
+    </div>
+{{/each}}
+</script>
+<!-- 定义模板 -->
+    <script>
+        // 定义补零函数
+        function bu(n){
+            if(n<=0){
+                return '0'+n
+            }else{
+                return n
+            }
+        }
+        // 定义过滤器
+        template.defaults.imports.guo = function(dtstr){
+            var dt = new Date(dtstr)
+            var y = dt.getFullYear()
+            var m = bu(dt.getMonth()+1)
+            var d = bu(dt.getDate())
+            var h = bu(dt.getHours())
+            var m = bu(dt.getMinutes())
+            return y + '-' +m +'-' + d +'-'+h+'-'+m;
+        }
+         // 定义过滤器
+        $(function(){
+            // 获取列表的数据get请求
+            function getNewsList (){
+                $.get('http://www.liulongbin.top:3006/api/news',
+                function(res){
+                    if(res.status !==200){return alert('获取新闻列表数据失败！')}
+                    // 创建循环
+                    for (var i=0;i<res.data.length;i++){
+                        // 把每一项的tags属性，从字符串改造成字符串的数组
+                        res.data[i].tags = res.data[i].tags.split(",")
+                    }
+                    // 模板引擎
+                   var htmlstr = template('tpl-news',res);
+                //    找到模板把他的内容设置为获取过来的数据
+                   $("#news-list").html(htmlstr);
+                  
+                //    
+                })
+            }
+            // 获取列表的数据get请求结束
+            // 调用请求数据
+            getNewsList();
+        })
+    </script>
+</body>
+</html>

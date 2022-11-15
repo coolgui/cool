@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0,user-scalable=no">
+    <title>Document</title>
+    <style>
+        div{
+            width: 200px;
+            height: 200px;
+            background: red;
+        }
+    </style>
+</head>
+<body>
+    <div></div>
+    <script>
+        // user-scalable=no,在meta里添加这一段话，禁止用户双击缩放
+        //获取元素
+        var div = document.querySelector('div');
+        //手指移动dom元素事件
+        div.addEventListener('touchmove',function(){
+            console.log('我在你身上移动');
+        })
+         //手指触摸dom元素事件
+         div.addEventListener('touchstart',function(e){
+            //touchs 返回有多少个手指触摸屏幕
+            // targetTouches 正在触摸当前元素的手指个数
+            // changenTouches 手指状态发生改变的列表，从有到无，从无到有
+            console.log(e.targetTouches[0]);
+            //targetTouches[0] 就可以得到正在触摸元素的第一个手指的相关信息，比如手指坐标
+        })
+        //手指离开dom元素事件
+        div.addEventListener('touchend',function(){
+            console.log('我离开了你');
+        })
+    </script>
+</body>
+</html>

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="js/jq.min.js"></script>
+</head>
+<body>
+    <input type="file" id="files">
+    <button id="btn">上传文件</button>
+    <img src="img/4.webp" alt="" width="200px" height="200px" style="display: none;" id="logo">
+    <script>
+        $(function(){
+            // 监听到Ajax发起请求$(document).ajaxStart
+            $(document).ajaxStart(function(){
+                $('#logo').show()
+            })
+            // 监听到Ajax完成请求$(document).ajaxStop
+            $(document).ajaxStop(function(){
+                $('#logo').hide()
+            })
+            $("#btn").on('click',function(){
+                // 把jq对象转换为dom对象
+                var files = $('#files')[0].files
+                if(files.length<= 0 ){
+                    return alert('请选择文件上传')
+                }
+                var fd =new FormData()
+                fd.append('avatar',files[0])
+                // 发起post请求
+                $.ajax({
+                    method:'POST',
+                    url:'http://www.liulongbin.top:3006/api/upload/avatar',
+                    data:fd,
+                    // 使用$文件上传必须要的两个属性
+                    processData:false,
+                    contentType:false,
+                    // 使用$文件上传必须要的两个属性
+                    success:function(res){
+                        console.log(res)
+                    }
+            })
+            })
+        })
+    </script>
+</body>
+</html>

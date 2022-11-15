@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="动画函数.js"></script>
+    <style>
+        
+        .sliderbar{
+            width: 400px;
+        }
+       span{
+        position: absolute;
+        top: 0;
+        left: 500px;
+        width: 50px;
+        height: 50px;
+        background: pink;
+       }
+        .con{
+            position: absolute;
+            top: 0;
+            left: 500px;
+            height: 50px;
+            width: 300px;
+            background: red;
+        }
+    </style>
+</head>
+<body>
+    <div class="sliderbar">
+        <div class="con">问题反馈</div>
+        <span>--</span>
+        
+    </div>
+    <script>
+        //获取元素
+        var sliderbar = document.querySelector('.sliderbar');
+        var con = document.querySelector('.con');
+        //当我们鼠标经过sliderbar就会让con这个盒子滑动到左侧
+        //当我们鼠标离开sliderbar就会让con这个盒子滑动到右侧
+        sliderbar.addEventListener('mouseenter',function(){
+            hao(con,-160,function(){
+                sliderbar.children[0].innerHTML = '<<';
+            });
+        })
+        sliderbar.addEventListener('mouseleave',function(){
+            hao(con,0);
+        })
+    </script>
+</body>
+</html>

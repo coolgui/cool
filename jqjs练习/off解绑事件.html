@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="jq.min.js"></script>
+</head>
+<body>
+    <script>
+        // 事件解绑
+        // 解除div身上的所有事件
+        $("div").off();
+        // 解除div身上的点击事件
+        $("div").off("click");
+         // 解除div身上的委托li事件
+         $("div").off("click","li");
+        //  只触发一次事件就不会再生效了
+         one();
+
+        //  自动触发事件
+        // 1.元素。事件()
+        $("div").click();//会触发元素的默认行为
+        // 元素.trigger("事件")
+        $("div").trigger("click");//会触发元素的默认行为
+        // 元素.triggerHandler("事件")
+        $("div").triggerHandler("click");//不会触发元素的默认行为
+
+        // 拷贝对象extend
+        // 把第二个的值拷贝给第一个，相同的数据会覆盖
+        $.extend(targetObj,obj);
+        // 深拷贝
+        // 把第二个的值复制给第一个，不冲突的属性就合并到一起
+        $.extend(true,targetObj,obj);
+
+        // $符号冲突
+        // 让jQuery释放对$控制权
+        // 把$改为suibian，一样使用
+        var suibian = jQuery.noConflict();
+    </script>
+</body>
+</html>

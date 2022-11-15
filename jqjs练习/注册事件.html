@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=btn, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <button>传统注册</button>
+    <button>监听注册</button>
+    <button>你好</button>
+    <script>
+        //1传统方式创建事件
+        //唯一性，只能执行一次代码，后面的会覆盖前面的
+        var btn = document.querySelectorAll('button');
+        btn[0].onclick = function(){
+            alert('hello');
+        }
+
+        //2监听方式创建事件 addEventListener 
+        //里面事件类型要加单引号，不带on
+        //同一个元素，事件可以添加多个侦听器
+        btn[1].addEventListener('click',function(){
+            alert('你好');
+        })
+        btn[1].addEventListener('click',function(){
+            alert('hello');
+        })
+
+        //attachEvent   ie9以前的版本才支持，不建议
+        // btn[2].attachEvent('onclick', function(){
+        //     alert('hello');
+        // })
+    </script>
+</body>
+</html>

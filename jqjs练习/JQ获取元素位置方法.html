@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="jq.min.js"></script>
+</head>
+<body>
+    <script>
+        // 获取.son距离文档的位置offset
+        $(".son").offset();
+        // 设置.son距离文档顶部的位置
+        $(".son").offset().top;
+        // 获取.son距离带有定位父级的位置position，只能获取不能设置位置
+        $(".son").position();
+        // 被卷去的头部距离scrollTop()
+        $(document).scrollTop();
+    </script>
+</body>
+</html>

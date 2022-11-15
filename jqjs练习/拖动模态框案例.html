@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .bodys{
+            
+          position: fixed;
+          left: 100px;
+          top: 200px;
+            background: rgb(255, 0, 0);
+            display: none;
+        }
+        .move{
+            height: 40px;
+            text-align: center;
+        }
+        
+    </style>
+</head>
+<body>
+    <!-- 拖动模态框案例 -->
+    <div class="denglu">点击，弹出登录框</div>
+    <div class="bodys">
+        <div class="move">登录会员</div>
+        用户名：<input type="text" value="请输入用户名"><br/>
+        登录密码：<input type="password" value="q请输入登录密码">
+        <div class="huiyuan">登录会员</div>
+        <div class="guan">关闭</div>
+    </div>
+    <script>
+        var denglu = document.querySelector('.denglu');
+        var guan =document.querySelector('.guan');
+        var move = document.querySelector('.move');
+        var bodys = document.querySelector('.bodys');
+        denglu.addEventListener('click',function(){
+            bodys.style.display= 'block';
+        });
+        guan.addEventListener('click',function(){
+            bodys.style.display= 'none';
+        })
+        //当我们按下鼠标，就获得鼠标在盒子内的坐标
+        move.addEventListener('mousedown',function(e){
+            var x = e.pageX - bodys.offsetLeft;
+            var y = e.pageY - bodys.offsetTop;
+            //鼠标移动的时候，把鼠标在页面中的坐标，减去鼠标在盒子内的坐标就是模态框的left和top值
+            document.addEventListener('mousemove',z);
+            function z(e){
+                bodys.style.left = e.pageX - x +'px';
+                bodys.style.top = e.pageY - y + 'px';
+            }
+            //鼠标弹起，就让鼠标移动事件移除
+            document.addEventListener('mouseup',function(){
+            document.removeEventListener('mousemove',z);
+        })
+      
+        })
+        
+    </script>
+    
+</body>
+</html>

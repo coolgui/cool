@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- 创建元素节点 -->
+    <ul>
+        <li></li>
+    </ul>
+    <script>
+        //1. 创建元素节点
+        var li=document.createElement('li');
+        //2.  添加节点  node.appendChild(child) node是父级 child是子级，后面追加元素
+        var ul=document.querySelector('ul');
+        ul.appendChild(li);
+        //3. 在元素前面添加节点，父亲.insertBefore(想要添加的元素，要加在谁的前面)
+        var lili = document.createElement('li');
+        ul.insertBefore(lili, ul.children[0]);
+        //4.  我们想要页面添加一个新元素，先创建元素再添加元素
+    </script>
+</body>
+</html>

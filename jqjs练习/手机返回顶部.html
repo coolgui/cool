@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .tou{
+            width: 300px;
+            height: 700px;
+            background: red;
+        }
+        .zhong{
+            width: 300px;
+            height: 700px;
+            background: rgb(0, 255, 17);
+        }
+        .wei{
+            width: 300px;
+            height: 700px;
+            background: rgb(60, 0, 255);
+        }
+        .fanhui{
+            display: none;
+            width: 50px;
+            height: 50px;
+            border-radius: 50px;
+            background: #000;
+            position:fixed;
+            bottom: 50px;
+           right: 50px;
+        }
+    </style>
+</head>
+<body>
+    <div class="fanhui"></div>
+    <div class="tou"></div>
+    <div class="zhong"></div>
+    <div class="wei"></div>
+    <script>
+        var fanhui = document.querySelector('.fanhui');
+        var zhong = document.querySelector('.zhong');
+        //
+        window.addEventListener('scroll',function(){
+            if(window.pageYOffset >= zhong.offsetTop){
+                fanhui.style.display = 'block';
+            }else{
+                fanhui.style.display = 'none';
+            }
+        });
+        //点击返回，滚动到最顶部
+        fanhui.addEventListener('click',function(){
+            window.scroll(0,0);
+        })
+    </script>
+</body>
+</html>

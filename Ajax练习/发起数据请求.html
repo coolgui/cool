@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="js/jq.min.js"></script>
+</head>
+<body>
+    <button id="btnget">发起不带参数的get请求</button>
+    <button id="btngett">发起带参数的get请求</button>
+    <button id="btnPOST">发起POST请求</button>
+    <button id="Ajaxget">使用Ajax发起带参数的get请求</button>
+    <button id="Ajaxpost">使用Ajax发起post请求</button>
+    <script>
+        $(function(){
+            // 发起不带参数的get请求
+            $("#btnget").on("click",function(){
+                $.get('http://www.liulongbin.top:3006/api/getbooks',function(res){
+                    console.log(res);
+                })
+            });
+            // 发起带参数的get请求
+            $("#btngett").on("click",function(){
+                // 获取id为2的数据
+                $.get('http://www.liulongbin.top:3006/api/getbooks',{id:2},function(res){
+                    console.log(res);
+                })
+            })
+            // 发起POST请求
+            $("#btnPOST").on("click",function(){
+                $.post('http://www.liulongbin.top:3006/api/addbook',
+                {bookname: '老虎', author: '老虎', publisher: '老虎'},function(res){
+                    console.log(res);
+                })
+            });
+            // 使用Ajax发起带参数的get请求
+            $("#Ajaxget").on("click",function(){
+                $.ajax({
+                // 设置是get请求还是post请求
+                type:'GET',
+                // 请求的url地址
+                url:'http://www.liulongbin.top:3006/api/getbooks',
+                // 想要获取的参数，如果不带参数可以省略
+                data:{id:1},
+                // 回调函数
+                success:function(res){
+                    console.log(res);
+                }
+            })
+            })
+            // 使用Ajax发起post请求
+            $("#Ajaxpost").on("click",function(){
+                $.ajax({
+                // 设置是get请求还是post请求
+                type:'POST',
+                // 请求的url地址
+                url:'http://www.liulongbin.top:3006/api/addbook',
+                // 想要获取的参数，如果不带参数可以省略
+                data:{bookname: '老虎', author: '老虎', publisher: '老虎'},
+                // 回调函数
+                success:function(res){
+                    console.log(res);
+                }
+            })
+            })
+            // 
+          
+        })
+    </script>
+</body>
+</html>

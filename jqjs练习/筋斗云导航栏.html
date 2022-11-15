@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        ul{
+            height: 50px;
+        }
+        ul li{
+            float: left;
+            width: 120px;
+        }
+        .yun{
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100px;
+            height: 50px;
+            background: green;
+        }
+    </style>
+</head>
+<body>
+    <div class="box">
+        <div class="yun"></div>
+        <ul>
+            <li>首页新闻</li>
+            <li>首页新闻</li>
+            <li>首页新闻</li>
+            <li>首页新闻</li>
+            <li>首页新闻</li>
+            <li>首页新闻</li>
+            <li>首页新闻</li>
+            <li>首页新闻</li>
+        </ul>
+    </div>
+    <script>
+        // 获取元素
+        var lis = document.querySelectorAll('li');
+        var yun = document.querySelector('.yun');
+        var box = document.querySelector('.box');
+        var weizhi = 0;
+        // 给所有的li绑定事件
+        for(i=0;i<lis.length;i++){
+            //鼠标经过，把当前li的位置作为目标值
+            lis[i].addEventListener('mouseenter',function(){
+                yun.style.left = this.offsetLeft + 'px';
+                
+            })
+            //鼠标离开，就复原为0
+            lis[i].addEventListener('mouseleave',function(){
+                
+               yun.style.left =  weizhi;
+               
+
+            })
+            //当我们鼠标点击，就把当前位置作为目标值
+            lis[i].addEventListener('click',function(){
+                weizhi= this.offsetLeft;
+            })
+        }
+</script>
+</body>
+</html>

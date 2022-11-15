@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="jq.min.js"></script>
+    <style>
+        li{
+            width: 200px;
+            height: 100px;
+            background: red;
+        }
+    </style>
+</head>
+<body>
+    <ul>
+        <li>1</li>
+        <li>2</li>
+        <li>3</li>
+        <li>4</li>
+        <li>5</li>
+    </ul>
+    <div class="ss">
+    <div><img src="img/1.webp" alt=""></div>
+    <div><img src="img/2.webp" alt=""></div>
+    <div><img src="img/3.webp" alt=""></div>
+    <div><img src="img/4.webp" alt=""></div>
+    <div><img src="img/5.webp" alt=""></div>
+</div>
+    <script>
+        // 鼠标经过左侧的li
+        $('ul li').mousemove(function(){
+            // 得到当前li的索引号
+            var index = $(this).index();
+            // 让我们右侧的盒子相应索引号的图片显示出来
+            $('.ss div').eq(index).show();
+             // 让我们右侧的盒子相应索引号的图片隐藏起来
+            $('.ss div').eq(index).siblings().hide();
+        })
+    </script>
+</body>
+</html>

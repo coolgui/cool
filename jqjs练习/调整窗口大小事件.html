@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        div{
+            width: 100px;
+            height: 100px;
+
+            background: red;
+        }
+    </style>
+</head>
+<body>
+    <div></div>
+    <script>
+        //window.innerWidth获取的是当前屏幕的宽度
+        //只要窗口大小发生变化，就会触发这个事件resize
+        var div = document.querySelector('div');
+        window.addEventListener('resize',function(){
+            console.log(window.innerWidth);
+            console.log('变化了');
+            if(window.innerWidth<=900){
+                div.style.display='none';
+            }else{
+                div.style.display='block';
+            }
+
+        })
+    </script>
+</body>
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form class="form1">
+        <input type="text" name="wenben">
+        <input type="password" name="wen">
+        <button class="submit">吧</button>
+    </form>
+    <script>
+        // 获取表单数据
+        var form = document.querySelector('.form1')
+        // 
+        form.addEventListener('submit',function(e){
+            // 阻止表单的默认行为
+            e.preventDefault()
+        
+        // 创建formdata，快速获取到form表单数据
+        var fd = new FormData(form)
+      
+        // 发起post请求
+        var xhr =new XMLHttpRequest()
+        xhr.open('POST','http://www.liulongbin.top:3006/api/formdata')
+        xhr.send(fd)
+        // 
+        xhr.onreadystatechange = function(){
+            // 固定写法
+            if(xhr.readyState === 4 && xhr.status === 200){
+                // 获取服务器响应的数据
+                console.log(JSON.parse(xhr.responseText))
+            }
+        }
+    })
+    </script>
+</body>
+</html>

@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        div{
+            width: 200px;
+            height: 200px;
+            background: pink;
+            position: absolute;
+            left: 0;
+            top: 200px;
+        }
+        span{
+            width: 300px;
+            height: 300px;
+            background: red;
+            display: block;
+            position: absolute;
+            left: 0;
+            top: 500px;
+        }
+    </style>
+</head>
+<body>
+    <button class="babai">点击800</button>
+    <button class="wubai">点击500</button>
+    <div></div>
+    <span></span>
+    <script>
+        // ..动画原理
+        //获得盒子当前位置
+        // 让盒子在当前位置上加1个移动距离
+        // 利用定时器不断重复这个操作
+        // 加一个结束定时器的条件
+        // 注意此元素需要添加定位,才可以实现
+        var div = document.querySelector('div');
+        // var timer = setInterval(function(){
+        //     if(div.offsetLeft>=500){
+        //         //停止动画，本质是停止定时器
+        //         clearInterval(timer);
+        //     }else{
+        //         div.style.left = div.offsetLeft + 1 +'px';
+        //     }
+        // },30);
+
+        //封装函数
+        //封装函数，定义变量，mingzi.timer
+        function hao(mingzi,shijian,black){
+            //设置动画缓动
+            //把步长值写到定时器里面
+            //步长公式(目标值-现在的位置)/10
+            var buchang = (shijian-mingzi.offsetLeft)/10;
+            buchang = buchang > 0 ? Math.ceil(buchang) : Math.floor(buchang);
+            // Math.ceil()数字取整
+            mingzi.timer = setInterval(function(){
+            if(mingzi.offsetLeft == shijian){
+                //停止动画，本质是停止定时器
+                clearInterval(mingzi.timer);
+                if(black){
+                    //调用回调函数
+                    //回调函数写在定时器结束的地方，结束了就调用
+                    black();
+                }
+            }else{
+                mingzi.style.left = mingzi.offsetLeft + buchang +'px';
+            }
+        },15);
+        };
+
+       var wubai = document.querySelector('.wubai');
+       var babai = document.querySelector('.babai');
+       wubai.addEventListener('click',function(){
+        hao(div,500,function(){
+            div.style.backgroundColor='red';
+        });
+       });
+       babai.addEventListener('click',function(){
+        hao(div,800,function(){
+            div.style.backgroundColor='red';
+        });
+       });
+    </script>
+</body>
+</html>

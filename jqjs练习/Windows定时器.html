@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <button>点击停止定时器</button>
+    <script>
+        //  setTimeout
+        //语法规范，window.setTimeout(调用函数，延迟时间)
+        // 这个window在调用的时候可以省略，延时时间是毫秒可以省略，默认是0
+        // 这个调用函数可以直接写函数,还可以写函数名
+        // setTimeout(function(){
+        //     alert('时间到了');
+        // },2000);
+        function x(){
+            alert('时间到了');
+        }
+        var names = setTimeout(x,5000);//给计时器命名，方便调用 
+        var namey = setTimeout(x,10000);
+        // 关闭定时器 clearTimeout(定时器的名字)；
+        var btn = document.querySelector('button');
+        btn.addEventListener('click',function(){
+            clearTimeout(names);
+        })
+    </script>
+</body>
+</html>

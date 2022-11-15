@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="jq.min.js"></script>
+</head>
+<body>
+    <script>
+        // width()/height() 获取设置元素的宽和高大小
+        console.log($("div").width());
+        // 修改元素的大小
+        $("div").width(300);
+        // innerwidth()/innerheight() 获取设置元素的宽和高+内边距大小
+        console.log($("div").innerWidth());
+        // outerwidth()/outerheight() 获取设置元素的宽和高+内边距加边框大小
+        console.log($("div").outerWidth());
+         // outerwidth(true)/outerheight(true) 获取设置元素的宽和高+内边距加边框加外边距大小
+         console.log($("div").outerWidth(true));
+    </script>
+</body>
+</html>

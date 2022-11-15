@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="jq.min.js"></script>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        .ss{
+            width: 200px;
+            height: 200px;
+            background: red;
+        }
+        ul li{
+            
+            width: 200px;
+            height: 200px;
+            background: rgb(16, 24, 255);
+        }
+        ul{
+            display: none;
+        }
+        .tt{
+            width: 210px;
+            height: 1000px;
+            display: block;
+            float: left;
+        }
+    </style>
+</head>
+<body>
+   <div class="tt">
+    <div class="ss">列表</div>
+    <ul>
+        <li>表单</li>
+        <li>表单</li>
+        <li>表单</li>
+        <li>表单</li>
+    </ul>
+</div>
+<div class="tt">
+    <div class="ss">列表</div>
+    <ul>
+        <li>表单</li>
+        <li>表单</li>
+        <li>表单</li>
+        <li>表单</li>
+    </ul>
+</div>
+<div class="tt">
+    <div class="ss">列表</div>
+    <ul>
+        <li>表单</li>
+        <li>表单</li>
+        <li>表单</li>
+        <li>表单</li>
+    </ul>
+</div>
+    <script>
+        $('.tt').mouseover(function(){
+            //鼠标经过
+            $(this).children('ul').show();
+            // 当前的tt里的亲ul显示出来
+        })
+        //鼠标离开
+        $('.tt ').mouseout(function(){
+            $(this).children('ul').hide();
+             // 当前的tt里的亲ul隐藏起来
+        })
+    </script>
+</body>
+</html>

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="jq.min.js"></script>
+</head>
+<body>
+    <button>按钮</button>
+    <button>按钮</button>
+    <button>按钮</button>
+    <button>按钮</button>
+    <button>按钮</button>
+    <button>按钮</button>
+    <script>
+        //隐式迭代，给所有按钮都绑定了点击事件
+        $('button').click(function(){
+            // 当前的元素变化背景颜色
+            $(this).css('background','pink');
+            // 其余的兄弟去掉背景颜色
+            $(this).siblings('button').css('background','');
+        })
+    </script>
+</body>
+</html>

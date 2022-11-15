@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="js/jq.min.js"></script>
+</head>
+<body>
+    <div></div>
+    <script>
+        // // 检测字符里是否有o这个属性
+        // // 先定义一个字符串
+        // var str = 'hello'
+        // // 声明一个变量，斜杠中间输入要找的字符
+        // var pattern = /o/
+        // // 变量的exec（）函数，括号里填要查找的
+        // console.log(pattern.exec(str))
+        var str = '<div>{{name}}今年{{ age }}岁了</div>'
+        // 声明真值
+        var data = {name:'张三',age:20}
+        var pattern = /{{\s*([a-zA-Z]+)\s*}}/
+        // 设置循环
+        // 声明一个变量，让他的值等于空
+        var nlll = null
+        // 循环开始，如果匹配不到数据了就结束
+        while(nlll = pattern.exec(str)){
+            // 字符串的第一个数替换成第二个数
+            // 获取真值
+            str = str.replace(nlll[0],data[nlll[1]])
+        }
+        console.log(str)
+    </script>
+</body>
+</html>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="js/jq.min.js"></script>
+    <title>Document</title>
+</head>
+<body>
+    <!--action表单要提交到哪，target="_blank",在另一个窗口打开提交的地址,
+        method="post"以什么方式提交，post在url栏看不到，默认看得到-->
+        <!-- 当涉及到文件上传时，enctype的值必须是这个="multipart/form-data" -->
+    <form action="" target="_blank" method="post" enctype="multipart/form-data" id="biao">
+        <input type="text" name="zhanghao">
+        <input type="password" name="mima">
+        <button type="submit" id="tijiao"></button>
+    </form>
+    <script>
+        $(function(){
+            // 找到表单，利用submit监听表单提交事件
+            $("#biao").on("submit",function(e){
+                // 阻止表单的默认提交行为
+                e.preventDefault();
+                // 利用serialize()获取表单所有提交数据，一定要有name属性
+                var data = $(this).serialize();
+                console.log(data)
+            })
+            // 
+        })
+    </script>
+</body>
+</html>

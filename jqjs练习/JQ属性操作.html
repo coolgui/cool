@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="jq.min.js"></script>
+</head>
+<body>
+    <a href="#" title="好的"></a>
+    <script>
+        // prop("属性名"),获取固有属性值，attr("属性名"),获取自定义属性值
+        console.log($("a").prop("href"));
+        // prop("属性名","属性值")，修改属性值，attr("属性名","属性值")，修改自定义属性值
+        $("a").prop("title","我们都挺好");
+    </script>
+</body>
+</html>

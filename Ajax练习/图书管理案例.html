@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <script src="js/jq.min.js"></script>
+</head>
+<body style="padding: 15px">
+    <!-- 添加图书的panel面板 -->
+    <div class="panel panel-primary">
+          <div class="panel-heading">
+                <h3 class="panel-title">添加新图书</h3>
+          </div>
+          <div class="panel-body form-inline">
+               <div class="input-group">
+                <div class="input-group-addon">书名</div>
+                <input type="text" class="form-control" id="iptbookname" placeholder="请输入书名">
+               </div>
+               <div class="input-group">
+                <div class="input-group-addon">书名</div>
+                <input type="text" class="form-control" id="iptauthor" placeholder="请输入作者">
+               </div>
+               <div class="input-group">
+                <div class="input-group-addon">出版社</div>
+                <input type="text" class="form-control" id="iptpublisher" placeholder="请输入出版社">
+               </div>
+               <button id="btnadd" class="btn btn-primary">添加</button>
+          </div>
+    </div>
+    <!-- 图书的表格 -->
+    
+    <table class="table table-bordered table-hover">
+        <thead>
+            <tr>
+                <th>id</th>
+                <th>书名</th>
+                <th>作者</th>
+                <th>出版社</th>
+                <th>删除</th>
+            </tr>
+        </thead>
+        <tbody id="tb">
+           
+        </tbody>
+    </table>
+
+    <script>
+        $(function(){
+            // 获取图书列表的数据
+            function getBookList (){
+                $.get('http://www.liulongbin.top:3006/api/getbooks',function(res){
+                    // 如果返回的status不等于200说明获取失败
+                    if(res.status !== 200) return alert('获取数据失败')
+                    // 设置一个空数组用来存储所有的tr行
+                    var rows = [];
+                    // 隐式迭代循环返回的数据
+                    $.each(res.data,function(i,item){{
+                        // 每一次循环，追加行
+                        rows.push('<tr><td>'+item.id+'</td><td>'+item.bookname+'</td><td>'+item.author+'</td><td>'+item.publisher+'</td><td><a href="javascript:;" class="del" data-id="'+ item.id+'">删除</a></td></tr>');
+                    }})
+                    // 找到tb，先清空他的所有数据，再追加数据
+                    $('#tb').empty().append(rows.join(''));
+                })
+            };
+            // 调用函数
+            getBookList ();
+            // 删除操作
+            // 通过事件委托给del添加点击事件
+            $('tbody').on('click','.del',function(){
+                // 获取自定义属性的值
+                var id = $(this).attr('data-id');
+                // 发起get删除请求
+                $.get('http://www.liulongbin.top:3006/api/delbook',{id:id},function(res){
+                    // 如果返回的status值不是200说明删除失败,返回一个弹窗
+                    if(res.status!==200) return alert('删除图书失败！');
+                    // 删除后再调用函数
+                    getBookList ();
+                })
+                // 
+            })
+              // 添加图书
+            // 找到添加的按钮，添加鼠标点击事件
+            $('#btnadd').on('click',function(){
+                // 找到三个要输入的文本框.trim()去掉空格内容
+                var bookname = $('#iptbookname').val().trim();
+                var author = $('#iptauthor').val().trim();
+                var publisher = $('#iptpublisher').val().trim();
+                // 判断每个框有没有没填的
+                if( bookname.length <=0 || author.length<=0 || publisher.length<=0)return alert("请填写完整！");
+                // 发起post添加请求
+                $.post('http://www.liulongbin.top:3006/api/addbook',
+                {bookname:bookname,author:author,publisher:publisher},function(res){
+                    // 如果返回的值不是201说明添加失败
+                    if(res.status!==201) return alert('添加图书失败');
+                    // 调用函数获取书名
+                    getBookList ();
+                    // 清空文本框里的值
+                    $('#iptbookname').val("");
+                    $('#iptauthor').val('');
+                    $('#iptpublisher').val('');
+                })
+                // 
+                
+            //    
+            })
+            // 
+        })
+    </script>
+</body>
+</html>

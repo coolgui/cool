@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .tu{
+            
+            width: 300px;
+            height: 300px;
+        }
+        .zhe{
+            display: none;
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 150px;
+            height: 150px;
+            background: yellow;
+            opacity: .5;
+        }
+        .dt{
+            display: none;
+            position: absolute;
+            top: 0;
+            left: 301px;
+            width: 600px;
+            height: 600px;
+        }
+        .dt img{
+            display: block;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+    </style>
+</head>
+<body>
+    <!-- 京东放大镜效果 -->
+    <div class="tu"><img src="bf77789c50fc5bc8.jpg" alt="" width="300px" height="300px"></div>
+    <div class="zhe"></div>
+    <div class="dt"><img src="bf77789c50fc5bc8.jpg" alt="" width="500px" height="500px" class="bgimg"></div>
+    <script>
+        var zhe = document.querySelector('.zhe');
+        var dt = document.querySelector('.dt');
+        var tu = document.querySelector('.tu')
+        //鼠标经过小图片显示遮罩层和大图片
+        tu.addEventListener('mousemove',function(){
+            dt.style.display = 'block';
+            zhe.style.display = 'block';
+        });
+        //鼠标 离开小图片，隐藏遮罩层和大图片
+        tu.addEventListener('mouseout',function(){
+            dt.style.display = 'none';
+            zhe.style.display = 'none';
+        });
+        //计算出鼠标在盒子内的坐标
+        tu.addEventListener('mousemove',function(e){
+            var x =e.pageX-tu.offsetLeft;
+            var y =e.pageY - tu.offsetTop;
+            //盒子高度是150,的一半是75，让遮罩层中心跟着鼠标走
+            //遮罩层.宽度的一半，让遮罩层中心跟着鼠标走
+            var kuanx=x-zhe.offsetWidth /2;
+            var gaoy=y-zhe.offsetHeight /2;
+            //如果x坐标小于0，就让他停在0的坐标
+            var zxh = tu.offsetWidth-zhe.offsetWidth;
+            
+            if(kuanx<=0){
+                kuanx=0;
+            }else if(kuanx>=zxh){
+                kuanx=zxh;
+            }
+            // 如果y坐标小于0，就让他停在0的坐标
+            if(gaoy<=0){
+                gaoy=0;
+            }else if(gaoy>=zxh){
+                gaoy=zxh;
+            }
+            //得到x，y的坐标
+            zhe.style.left=kuanx+'px';
+            zhe.style.top= gaoy+'px';
+            // 大图片的移动距离=遮挡层移动距离*大图片最大移动距离/遮挡层的最大移动距离
+            //大图的最大移动距离
+            var dt = document.querySelector('.dt');
+            var daimg = document.querySelector('.bgimg');
+            var dtmax = dt.offsetWidth-daimg.offsetWidth;
+            //大图片的移动距离
+            
+            var bigx = kuanx * dtmax / zxh;
+            var bigy = gaoy * dtmax / zxh;
+            daimg.style.left = bigx+'px';
+            daimg.style.top = bigy +'px';
+            
+
+        });
+    </script>
+</body>
+</html>

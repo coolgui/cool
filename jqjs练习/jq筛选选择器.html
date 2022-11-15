@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="jq.min.js"></script>
+</head>
+<body>
+    <div>
+    <ul>
+        <li>很多事</li>
+        <li>很多事</li>
+        <li>很多事</li>
+        <li>很多事</li>
+        <li>很多事</li>
+        <li>很多事</li>
+    
+
+    <ol>
+        <li>很多事</li>
+        <li>很多事</li>
+        <li class="uu">很多事</li>
+        <li>很多事</li>
+        <li>很多事</li>
+        <li>很多事</li>
+    </ol>
+</ul>
+</div>
+    <script>
+        //获取第一个元素
+        $('ul li:first').css('color','red');
+        //获取最后一个元素
+        $('ul li:last').css('color','yellow');
+        //获取第n个元素，索引号从0开始
+        $('ul li:eq(2)').css('color','blue');
+        // 获取索引号为基数的元素
+        $('ol li:odd').css('color','green');
+        // 获取索引号为偶数的元素
+        $('ol li:even').css('color','pink');
+        
+        //父级选择器，返回的是亲爸爸parent()
+        console.log($('ul li').parent());//li的亲爸爸
+        //亲儿子选择器children()
+        console.log($('ol').children());
+        //子孙后代选择器find()
+        console.log($('div').find('li'));
+        //兄弟选择器siblings()
+        console.log($('.uu').siblings('li'));
+        // 选择第n个元素eq()
+        $('ul li').eq(4).css('color','yellow');
+    </script>
+</body>
+</html>

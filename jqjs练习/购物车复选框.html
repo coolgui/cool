@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="jq.min.js"></script>
+    <style>
+        button{
+            width: 20px;
+            height: 20px;
+        }
+        .da input{
+            width: 20px;
+            height: 20px;
+        }
+    </style>
+</head>
+<body>
+    <input type="checkbox" class="quan">全选
+    <input type="checkbox" class="dan">勾选
+    <input type="checkbox" class="dan">勾选
+    <input type="checkbox" class="dan">勾选
+    <input type="checkbox" class="quan">全选
+    <div class="zuida">
+    <div class="yuanjia">15.60</div>
+    <div class="da">
+        <button class="jian">-</button>
+        <input type="text" value="1" class="text">
+        <button class="jia">+</button>
+    </div>
+    <div class="xiaoji">15.60</div>
+</div>
+<div class="zuida">
+    <div class="yuanjia">15.60</div>
+    <div class="da">
+        <button class="jian">-</button>
+        <input type="text" value="1" class="text">
+        <button class="jia">+</button>
+    </div>
+    <div class="xiaoji">15.60</div>
+</div>
+<div class="zuida">
+    <div class="yuanjia">15.60</div>
+    <div class="da">
+        <button class="jian">-</button>
+        <input type="text" value="1" class="text">
+        <button class="jia">+</button>
+    </div>
+    <div class="xiaoji">15.60</div>
+</div>
+<div class="zuida">
+    <div class="yuanjia">15.60</div>
+    <div class="da">
+        <button class="jian">-</button>
+        <input type="text" value="1" class="text">
+        <button class="jia">+</button>
+    </div>
+    <div class="xiaoji">15.60</div>
+</div>
+    <div class="jianshu"><em>1</em></div>
+    <div class="zongjian"><em>2</em></div>
+    <script>
+        zong();
+        // 当全选按钮发生改变时
+        $(".quan").change(function(){
+            // 获取全部按钮，让他的值跟着我的值改变，获取我的值
+            $(".dan,.quan").prop("checked", $(this).prop("checked"));
+        })
+        // 当单选按钮发生改变时
+        $('.dan').change(function(){
+            // 如果勾选的按钮等于我全部的单选按钮
+            if($(".dan:checked").length===$(".dan").length){
+                // 全选按钮的值就是对的，全选
+                $(".quan").prop("checked",true);
+            }else{
+                // 如果不等于,说明有的没选中,全选的值是错的,不勾选
+                $(".quan").prop("checked",false);
+            }
+        })
+
+        // 购物车加减商品
+        //找到加的名字，点击后
+        $(".jia").click(function(){
+            // 设置一个变量初始值为他的兄弟的text值
+            var zhi = $(this).siblings(".text").val();
+            // 变量自加1
+            zhi++;
+            // 找到这个元素兄弟为text的,把值设置为zhi
+            $(this).siblings(".text").val(zhi);
+            // 声明变量，获取原价的值
+            var danjia =  $(this).parent().siblings(".yuanjia").html();
+            //  获取小计，修改他的html
+            $(this).parent().siblings(".xiaoji").html((danjia*zhi).toFixed(2));
+            zong();
+        })
+
+        //找到减的名字，点击后
+        $(".jian").click(function(){
+              // 设置一个变量初始值为他的兄弟的text值
+            var zhi = $(this).siblings(".text").val();
+            // 如果zhi等于1，就返回错误，不自减
+            if(zhi==1){
+                return false;
+            }
+             // 变量自减1
+            zhi--;
+             // 找到这个元素兄弟为text的,把值设置为zhi
+            $(this).siblings(".text").val(zhi);
+             // 声明变量，获取原价的值
+             var danjia =  $(this).parent().siblings(".yuanjia").html();
+            //  获取小计，修改他的html,tofixed(),保留几位小数
+            $(this).parent().siblings(".xiaoji").html((danjia*zhi).toFixed(2));
+            zong();
+            
+        })
+        //用户修改文本框的值，计算小计模块
+        // 找到文本框的值，发生改变后
+        $(".da .text").change(function(){
+            // 把改变后的值设为变量
+            var zuixin = $(this).val();
+            // 声明变量，获取原价的值
+            var danjia =  $(this).parent().siblings(".yuanjia").html();
+            //  获取小计，修改他的html,为修改后的值乘以单价，tofixed(),保留几位小数
+            $(this).parent().siblings(".xiaoji").html((danjia*zuixin).toFixed(2));
+            zong();
+        });
+
+        // 计算总计和总额模块
+        function zong() {
+            // 计算总件数
+            var zjian = 0;
+            // 计算总额
+            var money = 0;
+            // 找到文本框,遍历他的每一个
+            $(".text").each(function(i,ele){
+                // 获取每个框里的val值再相加
+                zjian+= parseInt($(ele).val());
+           });
+        //    找到总价,把他的内容改为获取的总值
+           $(".zongjian em").text(zjian);
+            // 找到小计,遍历他的每一个
+           $(".xiaoji").each(function(i,ele){
+             // 获取每个框里的文本值再相加
+            money+= parseFloat($(ele).text());
+           })
+        //    找到件数,把他的内容改为获取的总值
+           $(".jianshu em").text(money);
+        }
+
+    </script>
+</body>
+</html>

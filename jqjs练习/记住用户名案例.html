@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- 记住用户名案例 -->
+    <input type="text" id="uname"><input type="checkbox" name="" id="remeber">记住用户名
+    <script>
+        var uname = document.querySelector('#uname');
+        var remeber = document.querySelector('#remeber');
+        // 判断有没有存储的值
+        if(localStorage.getItem('uname')){
+            // 如果有就交给文本框的value,把复选框选上
+            uname.value = localStorage.getItem('uname');
+            remeber.checked = true;
+        }
+        // 复选框改变
+        remeber.addEventListener('change',function(){
+            // 如果是选中状态，就保存数据
+            if(this.checked){
+                localStorage.setItem('uname',uname.value);
+            }else{
+                // 如果没选中，就删除数据
+                localStorage.removeItem('uname');
+            }
+        })
+    </script>
+</body>
+</html>

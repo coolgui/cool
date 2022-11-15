@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="js/jq.min.js"></script>
+</head>
+<body>
+    <button id="btn">发起请求</button>
+    <script>
+        $(function(){
+            $("#btn").on('click',function(){
+                $.ajax({
+                    url:'http://ajax.frontend.itheima.net:3006/api/jsonp?address=北京&location=顺义',
+                    dataType:'jsonp',
+                    jsonpCallback:'abc',
+                    success:function(res){
+                        console.log(res)
+                    }
+                })
+            })
+        })
+    </script>
+</body>
+</html>

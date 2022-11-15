@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <button class="go">开始定时器</button>
+    <button class="end">结束定时器</button>
+    <script>
+        var go = document.querySelector('.go');
+        var end = document.querySelector('.end');
+        var times = null;//创建全局变量，null是一个空对象，函数里的是局内变量
+        go.addEventListener('click',function(){
+            times = setInterval(function(){
+                console.log('开始了');
+            },1000)
+        })
+        end.addEventListener('click',function(){
+            clearInterval(times);
+            })
+        
+    </script>
+</body>
+</html>
